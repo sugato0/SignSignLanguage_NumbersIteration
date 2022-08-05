@@ -54,7 +54,7 @@ def photo_prediction(message):
                                          "\n telegramm:@zvukii_paniki\n"
                                          " Марьяна Молчанова-Великая Алексеевна"
                                          " \ntelegramm:@kotoylitka "
-                                         "\n https://sugato0.github.io/SignSignLanguage_NumbersIteration/ ")
+                                         "\n  https://sugato0.github.io/SignLanguage_numbersIteration_Page/ ")
 @bot.message_handler(content_types=["photo"])
 def photo_prediction(message):
 
