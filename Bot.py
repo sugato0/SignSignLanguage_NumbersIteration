@@ -11,7 +11,7 @@ from ImageProcessing import GetLmListFromImg
 import cv2
 import os
 
-import numpy as np
+
 import telebot
 from telebot import types
 import glob
@@ -20,10 +20,10 @@ import time
 
 def neuro_guess(pred_arr,message):
   convert_pred = dict()
-
+  print(pred_arr)
   for _ in enumerate(pred_arr[0]):
     convert_pred[_[0]] = _[1]
-    # print(_)
+
 
   asd= sorted(convert_pred.items(), key=lambda item: item[1], reverse=True)
 
@@ -54,12 +54,12 @@ def photo_prediction(message):
                                          "\n telegramm:@zvukii_paniki\n"
                                          " Марьяна Молчанова-Великая Алексеевна"
                                          " \ntelegramm:@kotoylitka "
-                                         "\n https://sugato0.github.io/neuro_bot_prediction/ ")
+                                         "\n https://sugato0.github.io/SignSignLanguage_NumbersIteration/ ")
 @bot.message_handler(content_types=["photo"])
 def photo_prediction(message):
 
 
-    # photo processing
+    # photo downloading
 
     FilePath = bot.get_file(message.photo[len(message.photo) - 1].file_id).file_path
     downloaded_file = bot.download_file(FilePath)
@@ -72,11 +72,14 @@ def photo_prediction(message):
 
 
     try:
+        #function from libriry
+        #getting list [x,y]
         data_our_image = GetLmListFromImg(src)
+
         print(data_our_image)
-
+        #predict and get list with result
         prediction = loaded_model.predict(data_our_image)
-
+        #func for outputing
         neuro_guess(prediction,message)
     except Exception as e:
 

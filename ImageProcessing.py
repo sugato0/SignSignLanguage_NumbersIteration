@@ -37,7 +37,7 @@ class HandDetector:
 
                 for id, lm in enumerate(handLms.landmark):
                     px, py, pz = int(lm.x * w), int(lm.y * h), int(lm.z * w)
-                    mylmList.append([px, py, pz])
+                    mylmList.append([px, py])
 
                 myHand["lmList"] = mylmList
 
@@ -87,16 +87,24 @@ def crop_res_img(image):
 #with mediapipe and function crop_res_img process our photo
 def GetLmListFromImg(image):
     image = cv2.imread(image)
-    crop_image = crop_res_img(image)
-    hands, image = detector.findHands(crop_image)
+
+    image = crop_res_img(image)
+
+    hands, image = detector.findHands(image)
     #have we got one of hands on our frame
+
+
+    # cv2.imshow("sf", image)
+    # cv2.waitKey()
+
+    print(np.shape(image),"\n",image)
 
     if hands:
         # Hand 1
         hand1 = hands[0]
 
 
-        lmList1 = hand1["lmList"]
+        lmList1 =  hand1["lmList"]
 
         return np.array([lmList1])
     else:
