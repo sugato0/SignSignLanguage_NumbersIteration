@@ -5,17 +5,14 @@ import mediapipe as mp
 import cv2
 from modelNumbers import loaded_model
 from ImageProcessing import GetLmListFromImg
-
-
 # -*- coding: utf-8 -*-
 import cv2
 import os
-
-
 import telebot
 from telebot import types
 import glob
 import time
+
 
 
 def neuro_guess(pred_arr,message):
@@ -38,8 +35,9 @@ bot = telebot.TeleBot(API_hand_detect)
 def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton("Наша команда")
-
+    btn2 = types.KeyboardButton("Пример жестов")
     markup.add(btn1)
+    markup.add(btn2)
     bot.send_message(message.chat.id,
                      text="<--- Привет!Покажи мне цифру от 0 - 9 одной рукой --->".format(
                          message.from_user), reply_markup=markup)
@@ -55,6 +53,8 @@ def photo_prediction(message):
                                          " Марьяна Молчанова-Великая Алексеевна"
                                          " \ntelegramm:@kotoylitka "
                                          "\n  https://sugato0.github.io/SignLanguage_numbersIteration_Page/ ")
+    if message.text == "Пример жестов":
+        bot.send_photo(message.chat.id, photo=("https://sayga12.ru/wp-content/uploads/2014/09/83ba5bb2615aec63c7c6277e0f48c139.jpg"))
 @bot.message_handler(content_types=["photo"])
 def photo_prediction(message):
 
